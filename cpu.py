@@ -1,6 +1,7 @@
 """CPU functionality."""
 
 import sys
+import datetime
 
 class CPU:
     """Main CPU class."""
@@ -310,6 +311,17 @@ class CPU:
         or the HLT instruction is called. 
         The instructions are called using a dictionary.
         """
+
+
+        time_stamp = datetime.datetime.now()
         while self.PC <= len(self.ram):
             IR = self.ram[self.PC]
+
+            # Time Interupts
+            new_time_stamp = datetime.datetime.now()
+            difference = new_time_stamp - time_stamp
+            if difference.__getattribute__('seconds') >= 1:
+            	pass
+
+
             self.branchtable[IR](self.ram[self.PC + 1], self.ram[self.PC + 2])
