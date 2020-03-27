@@ -27,6 +27,7 @@ class CPU:
         JMP   = 0b01010100
         JEQ   = 0b01010101
         JNE   = 0b01010110
+        #ADDI = TODO
 
         # Add Opcodes to a branchtable
         self.branchtable = {}
@@ -105,6 +106,27 @@ class CPU:
             self.reg[reg_a] += self.reg[reg_b]
         elif op == "SUB":
             self.reg[reg_a] -= self.reg[reg_b]
+        elif op == "AND":
+            #TODO
+            pass
+        elif op == "OR":
+            #TODO
+            pass
+        elif op == "XOR":
+            #TODO
+            pass
+        elif op == "NOT":
+            #TODO
+            pass
+        elif op == "SHL":
+            #TODO
+            pass
+        elif op == "SHR":
+            #TODO
+            pass
+        elif op == "MOD":
+            #TODO
+            pass
         else:
             raise Exception("Unsupported ALU operation")
 
@@ -248,23 +270,35 @@ class CPU:
         self.PC += 3
             
     def jmp(self, reg_a, reg_b = None):
+        """
+        Sets PC to the address within reg_a
+        """
         self.PC = self.reg[reg_a]
 
     def jeq(self, reg_a, reg_b):
+        """
+        If the FL flag indicates values are equal, call jmp instruction
+        """
         if self.FL == 0b00000001:
             self.jmp(reg_a)
         else:
             self.PC += 2
             
     def jne(self, reg_a, reg_b):
+        """
+        If the FL flag indicates values are not equal, call jmp instruction
+        """
         if self.FL == 0b00000010 or self.FL == 0b00000100:
             self.jmp(reg_a)
-            
         else:
             self.PC += 2
 
     def run(self):
-
+        """
+        This method runs until there is no more instructions left 
+        or the HLT instruction is called. 
+        The instructions are called using a dictionary.
+        """
         while self.PC <= len(self.ram):
             IR = self.ram[self.PC]
             self.branchtable[IR](self.ram[self.PC + 1], self.ram[self.PC + 2])
