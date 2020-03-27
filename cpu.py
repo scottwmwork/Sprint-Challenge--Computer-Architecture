@@ -27,7 +27,7 @@ class CPU:
         JMP   = 0b01010100
         JEQ   = 0b01010101
         JNE   = 0b01010110
-        #ADDI = TODO
+        ADDI =  0b10001000 # Could not find opcode in spec so I included opcode from MIPS sheet
 
         # Add Opcodes to a branchtable
         self.branchtable = {}
@@ -45,7 +45,7 @@ class CPU:
         self.branchtable[JMP]   = self.jmp
         self.branchtable[JEQ]   = self.jeq
         self.branchtable[JNE]   = self.jne 
-        #self.branchtable[ADDI] = self.addi
+        self.branchtable[ADDI]  = self.addi
 
         # Program Counter
         self.PC = 0
@@ -295,8 +295,8 @@ class CPU:
             self.PC += 2
 
     def addi(self, reg_a, val):
-    	#TODO
-    	pass
+    	self.reg[reg_a] += val
+    	self.PC += 3
 
     def run(self):
         """
