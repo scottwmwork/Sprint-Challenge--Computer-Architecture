@@ -27,7 +27,8 @@ class CPU:
         JMP   = 0b01010100
         JEQ   = 0b01010101
         JNE   = 0b01010110
-        ADDI =  0b10001000 # Could not find opcode in spec so I included opcode from MIPS sheet
+        ADDI  = 0b10001000 # Could not find opcode in spec so I included opcode from MIPS sheet
+        ST    = 0b10000100
 
         # Add Opcodes to a branchtable
         self.branchtable = {}
@@ -46,6 +47,7 @@ class CPU:
         self.branchtable[JEQ]   = self.jeq
         self.branchtable[JNE]   = self.jne 
         self.branchtable[ADDI]  = self.addi
+        self.branchtable[ST]    = self.st
 
         # Program Counter
         self.PC = 0
@@ -259,6 +261,10 @@ class CPU:
         PC_val = self.pop(5)
         # Set current PC to old PC value
         self.PC = PC_val
+
+    def st(self, reg_a, reg_b):
+    	val = self.reg[reg_b]
+    	self.ram_write(self.reg[reg_a], val)
 
     def cmp(self, reg_a, reg_b):
         if self.reg[reg_a] > self.reg[reg_b]:
