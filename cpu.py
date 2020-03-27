@@ -108,26 +108,26 @@ class CPU:
         elif op == "SUB":
             self.reg[reg_a] -= self.reg[reg_b]
         elif op == "AND":
-            #TODO
-            pass
+            and_result = self.reg[reg_a] & self.reg[reg_b]
+            self.reg[reg_a] = and_result
         elif op == "OR":
-            #TODO
-            pass
+            or_result = self.reg[reg_a] | self.reg[reg_b]
+            self.reg[reg_a] = or_result
         elif op == "XOR":
-            #TODO
-            pass
+            xor_result = self.reg[reg_a] ^ self.reg[reg_b]
+            self.reg[reg_a] = xor_result
         elif op == "NOT":
-            #TODO
-            pass
+            not_result =  ~ self.reg[reg_a]
+            self.reg[reg_a] = not_result
         elif op == "SHL":
-            #TODO
-            pass
+            shl_result = self.reg[reg_a] << self.reg[reg_b]
+            self.reg[reg_a] =shl_result
         elif op == "SHR":
-            #TODO
-            pass
+            shr_result = self.reg[reg_a] >> self.reg[reg_b]
+            self.reg[reg_a] = shr_result
         elif op == "MOD":
-            #TODO
-            pass
+            mod_result = self.reg[reg_a] % self.reg[reg_b]
+            self.reg[reg_a] = mod_result
         else:
             raise Exception("Unsupported ALU operation")
 
