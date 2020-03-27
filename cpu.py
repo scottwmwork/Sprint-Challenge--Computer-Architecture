@@ -45,6 +45,7 @@ class CPU:
         self.branchtable[JMP]   = self.jmp
         self.branchtable[JEQ]   = self.jeq
         self.branchtable[JNE]   = self.jne 
+        #self.branchtable[ADDI] = self.addi
 
         # Program Counter
         self.PC = 0
@@ -292,6 +293,10 @@ class CPU:
             self.jmp(reg_a)
         else:
             self.PC += 2
+
+    def addi(self, reg_a, val):
+    	#TODO
+    	pass
 
     def run(self):
         """
